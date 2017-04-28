@@ -1,0 +1,2 @@
+# SVDB
+Shadowverse Database
