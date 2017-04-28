@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>ShadowverseDB</title>
+  		<meta charset="utf-8">
+  		<meta name="viewport" content="width=device-width, initial-scale=1">
+ 	 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+ 	 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+ 	 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+ 	 	<style>
+ 	 		.form-inline .form-control {
+ 	 			width: 100%;
+ 	 		}
+
+ 	 		.content {
+ 	 			padding-left: 100px;
+ 	 			padding-right: 100px;
+ 	 		}
+
+ 	 		.btn {
+ 	 			min-width: 300px;
+ 	 		}
+
+ 	 		.req {
+ 	 			color: red;
+ 	 		}
+
+ 	 		body {
+				padding-top: 100px;
+				padding-bottom: 100px;
+			}
+ 	 	</style>
+
+    </head>
+    <body>
+        <div class="container-fluid">
+
+        <h1 style="text-align:center;">SHADOWVERSE DB</h1>
+
+        <ul class="nav nav-pills">
+  			<li role="presentation"><a href="http://45.55.249.114/">View All</a></li>
+ 			<li role="presentation" class="dropdown">
+			    <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+			      Add Card<span class="caret"></span>
+			    </a>
+			    <ul class="dropdown-menu">
+			      <li role="presentation"><a href="http://45.55.249.114/addfollower.html">Add Follower</a></li>
+			      <li role="presentation"><a href="http://45.55.249.114/addspell.html">Add Spell</a></li>
+			      <li role="presentation"><a href="http://45.55.249.114/addamulet.html">Add Amulet</a></li>
+			    </ul>
+  			<li role="presentation"><a href="http://45.55.249.114/delete.html">Delete</a></li>
+  			<li role="presentation" class="active"><a href="http://45.55.249.114/update.html">Update</a></li>
+		</ul>
+
+		<div class="container">
+        <form action="" id="updateForm" method="post" style="padding-top:50px">
+        	<div class="row">
+        		<div class="form-group">
+	        		<label>Table</label>
+					<br>
+	        		<div class="col-sm-2">
+	        			<label class="radio-inline"><input type="radio" name="optradio" value="follower" checked="checked">Follower</label>
+	    			</div>
+	    			<div class="col-sm-2">
+	        			<label class="radio-inline"><input type="radio" name="optradio" value="spell">Spell</label>
+	    			</div>
+	    			<div class="col-sm-2">
+	        			<label class="radio-inline"><input type="radio" name="optradio" value="amulet">Amulet</label>
+	    			</div>
+    			</div>
+			</div>
+
+			<script>
+				$(document).ready(function() {
+					$(".follower").show();
+					$(".amulet").hide();
+
+					$(":radio").change(function() {
+						if ( $("input[name=optradio]:checked", "#updateForm").val() == "follower" ) {
+							$(".follower").show();
+							$(".amulet").hide();
+						} else if ( $("input[name=optradio]:checked", "#updateForm").val() == "spell" ) {
+							$(".follower").hide();
+							$(".amulet").hide();
+						} else if ( $("input[name=optradio]:checked", "#updateForm").val() == "amulet" ) {
+							$(".follower").hide();
+							$(".amulet").show();
+						} 
+						
+					});
+				});
+			</script>
+
+
+			<br>
+        	<div class="row">
+			        <div class="col-sm-2">
+						<div class="form-group">
+							<label for="value">ID</label>
+							<input type="cardname" class="form-control" id="cardid" name="cardid" placeholder="Enter card ID." required>
+						</div>
+					</div>
+
+					<div class="col-sm-2">
+						<div class="form-group">
+							<label for="set">Column</label>
+							<select class="form-control" id="column" name="column" required>
+								<option disabled selected value> -- select an option -- </option>
+								<option>Name</option>
+								<option>Card Set</option>
+								<option>Class</option>
+								<option>Rarity</option>
+								<option>PP Cost</option>
+								<option>Flavor Text</option>
+								<option class="follower">Atk</option>
+								<option class="follower">Def</option>
+								<option class="follower">E.Atk</option>
+								<option class="follower">E.Def</option>
+								<option>Ability Text</option>
+								<option>Attribute Text</option>
+								<option class="follower">Sound URL</option>
+								<option>Artwork URL</option>
+								<option class="amulet">Amulet Type</option>
+							</select>
+						</div>
+					</div>
+
+			        <div class="col-sm-8">
+						<div class="form-group">
+							<label for="value">Value</label>
+							<input type="cardname" class="form-control" id="value" name="value" placeholder="Enter value." required>
+						</div>
+					</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-6 offset-sm-3">
+					<input id="submit" name="submit" type="submit" value="update" class="btn btn-primary" required>
+					<h6><span class="glyphicon glyphicon-asterisk req"></span>Note: all fields required.</h6>
+				</div>
+			</div>
+		</form>
+		</div>
+
+    <?php
+
+    if(isset($_POST["submit"])){
+
+			$servername = "localhost";
+			$username = "admin";
+			$password = "vcu2017";
+
+			// Create connection
+			$mysqli = new mysqli($servername, $username, $password);
+
+
+			/* change db to shadowverse db */
+			$mysqli->select_db("shadowverse");
+
+
+
+			$col = htmlspecialchars($_POST["column"], ENT_QUOTES,'UTF-8');
+
+			switch($col) {
+				case "Name":
+					$col = "name";
+					break;
+				case "Card Set":
+					$col = "cardset";
+					break;
+				case "Class":
+					$col = "class";
+					break;
+				case "Rarity":
+					$col = "rarity";
+					break;
+				case "PP Cost":
+					$col = "ppcost";
+					break;
+				case "Flavor Text":
+					$col = "flavortext";
+					break;
+				case "Atk":
+					$col = "atk";
+					break;
+				case "Def":
+					$col = "def";
+					break;
+				case "E.Atk":
+					$col = "eatk";
+					break;
+				case "E.Def":
+					$col = "edef";
+					break;
+				case "Ability Text":
+					$col = "abilityText";
+					break;
+				case "Attribute Text":
+					$col = "attribute";
+					break;
+				case "Sound URL":
+					$col = "soundURL";
+					break;
+				case "Artwork URL":
+					$col = "artworkURL";
+					break;
+				case "Amulet Type":
+					$col = "type";
+					break;
+				default:
+					break;
+			}
+
+			$radio = $_POST['optradio'];
+
+			$table = "";
+			$tableid = "id";
+
+			switch($radio) {
+				case "follower":
+					$table = "followercard";
+					if ($col == "artworkURL") {
+						$table = "followerartwork";
+						$tableid = "artworkID";
+					}
+					if ($col == "soundURL") {
+						$table = "sound";
+						$tableid = "soundID";
+					}
+					if ($col == "abilityText") {
+						$table = "followerability";
+						$tableid = "followerID";
+					}
+					break;
+				case "spell":
+					$table = "spellcard";
+					if ($col == "artworkURL") {
+						$table = "spellartwork";
+						$tableid = "artworkID";
+					}
+					if ($col == "abilityText") {
+						$table = "spellability";
+						$tableid = "spellID";
+					}
+					break;
+				case "amulet":
+					$table = "amuletcard";
+					if ($col == "artworkURL") {
+						$table = "amuletartwork";
+						$tableid = "artworkID";
+					}
+					if ($col == "abilityText") {
+						$table = "amuletability";
+						$tableid = "abilityID";
+					}
+					break;
+			}
+
+
+			$data = htmlspecialchars($_POST["value"], ENT_QUOTES,'UTF-8');
+			
+			$id = htmlspecialchars($_POST["cardid"], ENT_QUOTES,'UTF-8');
+			$query = "UPDATE ". $table . " SET ". $col . " = " . "\"".$data . "\""." WHERE ". $tableid. " = ". $id . ";"; 
+			echo $query;
+
+			if ($mysqli->query($query) === TRUE) {
+				echo '<pre>'; print_r($query. " SUCCESS"); echo '</pre>';
+			} else {
+				echo '<pre>'; print_r($query. " FAILURE"); echo '</pre>';
+			}
+
+			$mysqli->close();
+	}
+
+	?>
+
+    </body>
+</html>

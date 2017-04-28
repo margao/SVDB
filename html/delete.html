@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>ShadowverseDB</title>
+  		<meta charset="utf-8">
+  		<meta name="viewport" content="width=device-width, initial-scale=1">
+ 	 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+ 	 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+ 	 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+ 	 	<style>
+ 	 		.form-inline .form-control {
+ 	 			width: 100%;
+ 	 		}
+
+ 	 		.content {
+ 	 			padding-left: 100px;
+ 	 			padding-right: 100px;
+ 	 		}
+
+ 	 		.btn {
+ 	 			min-width: 300px;
+ 	 		}
+
+ 	 		.req {
+ 	 			color: red;
+ 	 		}
+
+ 	 		body {
+				padding-top: 100px;
+				padding-bottom: 100px;
+			}
+ 	 	</style>
+
+    </head>
+    <body>
+        <div class="container-fluid">
+
+        <h1 style="text-align:center;">SHADOWVERSE DB</h1>
+
+        <ul class="nav nav-pills">
+  			<li role="presentation"><a href="http://45.55.249.114/">View All</a></li>
+ 			<li role="presentation" class="dropdown">
+			    <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+			      Add Card<span class="caret"></span>
+			    </a>
+			    <ul class="dropdown-menu">
+			      <li role="presentation"><a href="http://45.55.249.114/addfollower.html">Add Follower</a></li>
+			      <li role="presentation"><a href="http://45.55.249.114/addspell.html">Add Spell</a></li>
+			      <li role="presentation"><a href="http://45.55.249.114/addamulet.html">Add Amulet</a></li>
+			    </ul>
+  			<li role="presentation" class="active"><a href="http://45.55.249.114/delete.html">Delete</a></li>
+  			<li role="presentation"><a href="http://45.55.249.114/update.html">Update</a></li>
+		</ul>
+
+		<div class="container">
+        <form action="" id="updateForm" method="post" style="padding-top:50px">
+        	<div class="row">
+        		<div class="form-group">
+	        		<label>Table</label>
+					<br>
+	        		<div class="col-sm-2">
+	        			<label class="radio-inline"><input type="radio" name="optradio" value="follower" checked="checked">Follower</label>
+	    			</div>
+	    			<div class="col-sm-2">
+	        			<label class="radio-inline"><input type="radio" name="optradio" value="spell">Spell</label>
+	    			</div>
+	    			<div class="col-sm-2">
+	        			<label class="radio-inline"><input type="radio" name="optradio" value="amulet">Amulet</label>
+	    			</div>
+    			</div>
+			</div>
+
+			<script>
+				$(document).ready(function() {
+					$(":radio").change(function() {
+						if ( $("input[name=optradio]:checked", "#updateForm").val() == "follower" ) {
+							$(".follower").prop("disabled", false);
+							$(".amulet").prop("disabled", true);
+						} else if ( $("input[name=optradio]:checked", "#updateForm").val() == "spell" ) {
+							$(".follower").prop("disabled", true);
+							$(".amulet").prop("disabled", true);
+						} else if ( $("input[name=optradio]:checked", "#updateForm").val() == "amulet" ) {
+							$(".follower").prop("disabled", true);
+							$(".amulet").prop("disabled", false);
+						} 
+						
+					});
+				});
+			</script>
+
+
+			<br>
+        	<div class="row">
+			        <div class="col-sm-2 offset-sm-5">
+						<div class="form-group">
+							<label for="value">ID</label>
+							<input type="cardname" class="form-control" id="cardid" name="cardid" placeholder="Enter card ID." required>
+						</div>
+					</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-6 offset-sm-3">
+					<input id="submit" name="submit" type="submit" value="Delete" class="btn btn-primary" required>
+					<h6><span class="glyphicon glyphicon-asterisk req"></span>Note: all fields required.</h6>
+				</div>
+			</div>
+		</form>
+		</div>
+
+    <?php
+
+    if(isset($_POST["submit"])){
+
+			$servername = "localhost";
+			$username = "admin";
+			$password = "vcu2017";
+
+			// Create connection
+			$mysqli = new mysqli($servername, $username, $password);
+
+
+			/* change db to shadowverse db */
+			$mysqli->select_db("shadowverse");
+
+			$type = $_POST['optradio'];
+			$id = $_POST['cardid'];
+			$query = [];
+
+
+			switch($type) {
+				case "follower":
+					array_push($query, "followercard");
+					array_push($query, "sound");
+					array_push($query, "followerartwork");
+					array_push($query, "followerability");
+
+					break;
+				case "spell":
+					array_push($query, "spellcard");
+					array_push($query, "spellartwork");
+					array_push($query, "spellability");
+
+					break;
+				case "amulet":
+					array_push($query, "amuletcard");
+					array_push($query, "amuletartwork");
+					array_push($query, "amuletability");
+
+					break;
+			}
+
+
+			$tablepk = "";
+			$success = [];
+
+			for ( $i = 0; $i < sizeof($query); $i++ ) {
+
+				if ($query[$i] == "followercard" || $query[$i] == "spellcard" || $query[$i] == "amuletcard") {
+					$tablepk = "id";
+				} elseif ($query[$i] == "followerartwork" || $query[$i] == "spellartwork" || $query[$i] == "amuletartwork") {
+					$tablepk = "artworkID";
+				} elseif ($query[$i] == "amuletability") {
+					$tablepk = "abilityID";
+				} elseif ($query[$i] == "followerability") {
+					$tablepk = "followerID";
+				} elseif ($query[$i] == "spellability") {
+					$tablepk = "spellID";
+				} else {
+					$tablepk = "soundID";
+				}
+
+				$buildQuery = "DELETE FROM ". $query[$i] . " WHERE ". $tablepk . " = " . $id .";";
+
+				if ($i == 0) {
+					echo '<pre>'; print_r("EXECUTING SQL STATEMENTS"); echo '</pre>';
+				}
+				if ($mysqli->query($buildQuery) === TRUE) {
+					array_push($success, "SUCCESS");
+				} else {
+					array_push($success, "FAILURE");
+				}
+				echo '<pre>'; print_r($buildQuery." ".$success[$i]); echo '</pre>';
+			}
+
+			$mysqli->close();
+	}
+
+	?>
+
+    </body>
+</html>

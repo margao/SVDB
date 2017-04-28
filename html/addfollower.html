@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>ShadowverseDB</title>
+  		<meta charset="utf-8">
+  		<meta name="viewport" content="width=device-width, initial-scale=1">
+ 	 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+ 	 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+ 	 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+ 	 	<style>
+ 	 		.form-inline .form-control {
+ 	 			width: 100%;
+ 	 		}
+
+ 	 		.content {
+ 	 			padding-left: 100px;
+ 	 			padding-right: 100px;
+ 	 		}
+
+ 	 		.btn {
+ 	 			min-width: 500px;
+ 	 		}
+
+ 	 		.req {
+ 	 			color: red;
+ 	 		}
+
+ 	 		body {
+				padding-top: 100px;
+				padding-bottom: 100px;
+			}
+ 	 	</style>
+
+    </head>
+    <body>
+        <div class="container-fluid">
+
+        <h1 style="text-align:center;">SHADOWVERSE DB</h1>
+
+        <ul class="nav nav-pills">
+  			<li role="presentation"><a href="http://45.55.249.114/">View All</a></li>
+ 			<li role="presentation" class="dropdown active">
+			    <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+			      Add Card<span class="caret"></span>
+			    </a>
+			    <ul class="dropdown-menu">
+			      <li role="presentation"><a href="http://45.55.249.114/addfollower.html">Add Follower</a></li>
+			      <li role="presentation"><a href="http://45.55.249.114/addspell.html">Add Spell</a></li>
+			      <li role="presentation"><a href="http://45.55.249.114/addamulet.html">Add Amulet</a></li>
+			    </ul>
+  			<li role="presentation"><a href="http://45.55.249.114/delete.html">Delete</a></li>
+  			<li role="presentation"><a href="http://45.55.249.114/update.html">Update</a></li>
+		</ul>
+
+		<div class="content">
+        <form action="" id="addForm" method="post" style="padding-top:50px">
+
+		        <div class="row">
+			        <div class="col">
+						<div class="form-group">
+							<label for="name">Card Name</label>
+							<input type="cardname" class="form-control" id="name" name="name" placeholder="Enter card name." required>
+						</div>
+					</div>
+				</div>
+
+				<div class="row">
+			        <div class="col-sm-6">
+						<div class="form-group">
+							<label for="set">Set</label>
+							<select class="form-control" id="set" name="set" required>
+								<option disabled selected value> -- select an option -- </option>
+								<option>Basic</option>
+								<option>Standard</option>
+								<option>Darkness Evolved</option>
+								<option>Rise of Bahamut</option>
+								<option>Tempest of the Gods</option>
+							</select>
+						</div>
+					</div>
+					<div class="col-sm-6">
+						<div class="form-group">
+							<label for="class">Class</label>
+							<select class="form-control" id="class" name="class" required>
+								<option disabled selected value> -- select an option -- </option>
+								<option>Forestcraft</option>
+								<option>Swordcraft</option>
+								<option>Runecraft</option>
+								<option>Dragonccraft</option>
+								<option>Shadowcraft</option>
+								<option>Bloodcraft</option>
+								<option>Havencraft</option>
+								<option>Neutral</option>
+							</select>
+						</div>
+					</div>
+				</div>
+
+				<div class="row">
+			        <div class="col-sm-6">
+						<div class="form-group">
+							<label for="rarity">Rarity</label>
+							<select class="form-control" id="rarity" name="rarity" required>
+								<option disabled selected value> -- select an option -- </option>
+								<option>Bronze</option>
+								<option>Silver</option>
+								<option>Gold</option>
+								<option>Legendary</option>
+							</select>
+						</div>
+					</div>
+					<div class="col-sm-6">
+						<div class="form-group">
+							<label for="ppcost">PP Cost</label>
+							<select class="form-control" id="ppcost" name="ppcost" required>
+								<option disabled selected value> -- select an option -- </option>
+								<option>1</option>
+								<option>2</option>
+								<option>3</option>
+								<option>4</option>
+								<option>5</option>
+								<option>6</option>
+								<option>7</option>
+								<option>8</option>
+								<option>9</option>
+								<option>10</option>
+								<option>1</option>
+								<option>12</option>
+								<option>13</option>
+								<option>14</option>
+								<option>15</option>
+								<option>16</option>
+								<option>17</option>
+								<option>18</option>
+							</select>
+						</div>
+					</div>
+				</div>
+
+				<div class="row">
+			        <div class="col">
+						<div class="form-group">
+							<label for="flavortext">Flavor Text</label>
+							<input type="flavortext" class="form-control" id="flavortext" name="flavortext" placeholder="Enter card flavor text." required>
+						</div>
+					</div>
+				</div>
+
+				<div class="row">
+			        <div class="col-sm-3">
+						<div class="form-group">
+							<label for="atk">Attack</label>
+							<select class="form-control" id="atk" name="atk" required>
+								<option disabled selected value> -- select an option -- </option>
+								<option>0</option>
+								<option>1</option>
+								<option>2</option>
+								<option>3</option>
+								<option>4</option>
+								<option>5</option>
+								<option>6</option>
+								<option>7</option>
+								<option>8</option>
+								<option>9</option>
+								<option>10</option>
+								<option>1</option>
+								<option>12</option>
+								<option>13</option>
+								<option>14</option>
+								<option>15</option>
+							</select>
+						</div>
+					</div>
+					<div class="col-sm-3">
+						<div class="form-group">
+							<label for="def">Defense</label>
+							<select class="form-control" id="def" name="def" required>
+								<option disabled selected value> -- select an option -- </option>
+								<option>0</option>
+								<option>1</option>
+								<option>2</option>
+								<option>3</option>
+								<option>4</option>
+								<option>5</option>
+								<option>6</option>
+								<option>7</option>
+								<option>8</option>
+								<option>9</option>
+								<option>10</option>
+								<option>1</option>
+								<option>12</option>
+								<option>13</option>
+								<option>14</option>
+								<option>15</option>
+							</select>
+						</div>
+					</div>
+		
+			        <div class="col-sm-3">
+						<div class="form-group">
+							<label for="eatk">Evol. Attack</label>
+							<select class="form-control" id="eatk" name="eatk" required>
+								<option disabled selected value> -- select an option -- </option>
+								<option>0</option>
+								<option>1</option>
+								<option>2</option>
+								<option>3</option>
+								<option>4</option>
+								<option>5</option>
+								<option>6</option>
+								<option>7</option>
+								<option>8</option>
+								<option>9</option>
+								<option>10</option>
+								<option>1</option>
+								<option>12</option>
+								<option>13</option>
+								<option>14</option>
+								<option>15</option>
+							</select>
+						</div>
+					</div>
+					<div class="col-sm-3">
+						<div class="form-group">
+							<label for="edef">Evol. Defense</label>
+							<select class="form-control" id="edef" name="edef" required>
+								<option disabled selected value> -- select an option -- </option>
+								<option>0</option>
+								<option>1</option>
+								<option>2</option>
+								<option>3</option>
+								<option>4</option>
+								<option>5</option>
+								<option>6</option>
+								<option>7</option>
+								<option>8</option>
+								<option>9</option>
+								<option>10</option>
+								<option>1</option>
+								<option>12</option>
+								<option>13</option>
+								<option>14</option>
+								<option>15</option>
+							</select>
+						</div>
+					</div>
+				</div>		
+
+		        <div class="row">
+			        <div class="col">
+						<div class="form-group">
+							<label for="ability">Ability Text</label>
+							<input type="ability" class="form-control" id="ability" name="ability" placeholder="Enter ability text." required>
+						</div>
+					</div>
+				</div>
+
+				<div class="row">
+			        <div class="col">
+						<div class="form-group">
+							<label for="attribute">Attribute</label>
+							<select class="form-control" id="attribute" name="attribute" required>
+								<option disabled selected value> -- select an option -- </option>
+								<option>None</option>
+								<option>Officer</option>
+								<option>Commander</option>
+								<option>Earth Sigil</option>
+							</select>
+						</div>
+					</div>
+				</div>
+
+		        <div class="row">
+			        <div class="col">
+						<div class="form-group">
+							<label for="sound">Sound URL</label>
+							<input type="cardname" class="form-control" id="sound" name="sound" placeholder="Enter sound URL." required>
+						</div>
+					</div>
+				</div>
+
+		        <div class="row">
+			        <div class="col">
+						<div class="form-group">
+							<label for="artwork">Artwork URL</label>
+							<input type="cardname" class="form-control" id="artwork" name="artwork" placeholder="Enter artwork URL." required>
+						</div>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col text-center">
+						<input id="submit" name="submit" type="submit" value="Add Follower" class="btn btn-primary" required>
+						<h6><span class="glyphicon glyphicon-asterisk req"></span>Note: all fields required.</h6>
+					</div>
+				</div>
+
+			</div>
+		</form>
+		</div>
+
+    <?php
+    if(isset($_POST["submit"])){
+
+			$servername = "localhost";
+			$username = "admin";
+			$password = "vcu2017";
+
+			// Create connection
+			$mysqli = new mysqli($servername, $username, $password);
+
+
+			/* change db to shadowverse db */
+			$mysqli->select_db("shadowverse");
+
+			$sound = htmlspecialchars($_POST["sound"], ENT_QUOTES,'UTF-8');
+			$artwork = htmlspecialchars($_POST["artwork"], ENT_QUOTES,'UTF-8');
+			$ability = htmlspecialchars($_POST["ability"], ENT_QUOTES,'UTF-8');	
+			$name = htmlspecialchars($_POST["name"], ENT_QUOTES,'UTF-8');
+			$flavor = $mysqli->real_escape_string($_POST["flavortext"]);
+
+			$addsound = "INSERT INTO sound VALUES(null,'". $sound."');";
+			$addartwork = "INSERT INTO followerartwork VALUES(null,'". $artwork."');";
+			$addability = "INSERT INTO followerability VALUES(null,'". $ability."');";
+
+			if ($mysqli->query($addsound) === TRUE && $mysqli->query($addartwork) === TRUE && $mysqli->query($addability) === TRUE) {
+				$last_id = $mysqli->insert_id;
+
+				$addcard = "INSERT INTO followercard VALUES(null,\"". $name."\", \"". $_POST["set"]."\", \"". $_POST["class"]."\", \"". $_POST["rarity"]."\", ". $_POST["ppcost"].", \"".$flavor."\", ". $_POST["atk"].",".$_POST["def"].",".$_POST["eatk"].",".$_POST["edef"].",\"".$last_id."\", \"".$_POST["attribute"]."\", ". $last_id.", ".$last_id.");";
+
+				$mysqli->query($addcard);
+
+				echo '<pre>'; print_r($addcard. " SUCCESS"); echo '</pre>';
+			} else {
+				echo '<pre>'; print_r($addcard. " FAILURE"); echo '</pre>';
+			}
+			$mysqli->close();
+	}
+	?>
+
+    </body>
+</html>

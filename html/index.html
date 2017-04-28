@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>ShadowverseDB</title>
+  		<meta charset="utf-8">
+  		<meta name="viewport" content="width=device-width, initial-scale=1">
+ 	 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+ 	 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+ 	 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+ 	 	<!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/bootstrap-table.min.css">
+
+		<!-- Latest compiled and minified JavaScript -->
+		<script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/bootstrap-table.min.js"></script>
+
+		<!-- Latest compiled and minified Locales -->
+		<script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/locale/bootstrap-table-zh-CN.min.js"></script>
+ 	 	<style>
+
+ 	 		.form-inline .form-control {
+ 	 			width: 100%;
+ 	 		}
+			body {
+				padding-top: 100px;
+				padding-bottom: 100px;
+			}
+
+ 	 		.content {
+ 	 			padding-left: 100px;
+ 	 			padding-right: 100px;
+ 	 			padding-top: 50px;
+ 	 		}
+ 	 		
+ 	 		#myInput {
+			    background-image: url('http://45.55.249.114/images/searchicon.png'); /* Add a search icon to input */
+			    background-position: 10px 12px; /* Position the search icon */
+			    background-repeat: no-repeat; /* Do not repeat the icon image */
+			    width: 100%; /* Full-width */
+			    font-size: 16px; /* Increase font-size */
+			    padding: 12px 20px 12px 40px; /* Add some padding */
+			    border: 1px solid #ddd; /* Add a grey border */
+			    margin-bottom: 12px; /* Add some space below the input */
+			}
+
+		</style>
+    </head>
+    <body>
+    	
+        <div class="container-fluid">
+
+        <h1 style="text-align:center;">SHADOWVERSE DB</h1>
+
+        <ul class="nav nav-pills">
+  			<li role="presentation" class="active"><a href="#">View All</a></li>
+ 			<li role="presentation" class="dropdown">
+			    <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+			      Add Card<span class="caret"></span>
+			    </a>
+			    <ul class="dropdown-menu">
+			      <li role="presentation"><a href="http://45.55.249.114/addfollower.html">Add Follower</a></li>
+			      <li role="presentation"><a href="http://45.55.249.114/addspell.html">Add Spell</a></li>
+			      <li role="presentation"><a href="http://45.55.249.114/addamulet.html">Add Amulet</a></li>
+			    </ul>
+  			<li role="presentation"><a href="http://45.55.249.114/delete.html">Delete</a></li>
+  			<li role="presentation"><a href="http://45.55.249.114/update.html">Update</a></li>
+		</ul>
+
+		<div class="content">
+			<input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search by name.">
+
+			<div class = "container" >
+				<div class="row">
+					<div class="col-xs-1">
+						<label> PP Cost </label>
+					</div>
+		        	<div class="form-check form-check-inline col-xs-1">
+					  <label class="form-check-label">
+					    <input class="form-check-input ppcost" type="checkbox" id="ppcost" value="1"> 1
+					  </label>
+					</div>
+					<div class="form-check form-check-inline col-xs-1">
+					  <label class="form-check-label">
+					    <input class="form-check-input ppcost" type="checkbox" id="ppcost" value="2"> 2
+					  </label>
+					</div>
+					<div class="form-check form-check-inline col-xs-1">
+					  <label class="form-check-label">
+					    <input class="form-check-input ppcost" type="checkbox" id="ppcost" value="3" > 3
+					  </label>
+					</div>
+					  <div class="form-check form-check-inline col-xs-1">
+					  <label class="form-check-label">
+					    <input class="form-check-input ppcost" type="checkbox" id="ppcost" value="4"> 4
+					  </label>
+					</div>
+					<div class="form-check form-check-inline col-xs-1">
+					  <label class="form-check-label">
+					    <input class="form-check-input ppcost" type="checkbox" id="ppcost" value="5"> 5
+					  </label>
+					</div>
+					<div class="form-check form-check-inline col-xs-1">
+					  <label class="form-check-label">
+					    <input class="form-check-input ppcost" type="checkbox" id="ppcost" value="6" > 6
+					  </label>
+					  </div>
+					<div class="form-check form-check-inline col-xs-1">
+					  <label class="form-check-label">
+					    <input class="form-check-input ppcost" type="checkbox" id="ppcost" value="7"> 7
+					  </label>
+					</div>
+					<div class="form-check form-check-inline col-xs-1">
+					  <label class="form-check-label">
+					    <input class="form-check-input ppcost" type="checkbox" id="ppcost" value="8"> 8
+					  </label>
+					</div>
+					<div class="form-check form-check-inline col-xs-1">
+					  <label class="form-check-label">
+					    <input class="form-check-input ppcost" type="checkbox" id="ppcost" value="9" > 9
+					  </label>
+					  </div>
+					  <div class="form-check form-check-inline col-xs-1">
+					  <label class="form-check-label ppcost">
+					    <input class="form-check-input ppcost" type="checkbox" id="ppcost" value="10" > 10+
+					  </label>
+					  </div>
+				 </div>
+
+				 <div class="row">
+				 	<div class="col-xs-1">
+						<label> Card Set </label>
+					</div>
+				  	<div class="form-check form-check-inline col-xs-2">
+					  <label class="form-check-label">
+					    <input class="form-check-input set" type="checkbox" rel="set" value="basic" > Basic
+					  </label>
+					</div>
+					<div class="form-check form-check-inline col-xs-2">
+					  <label class="form-check-label">
+					    <input class="form-check-input set" type="checkbox" rel="set" value="standard" > Standard
+					  </label>
+					</div>
+					<div class="form-check form-check-inline col-xs-2">
+					  <label class="form-check-label">
+					    <input class="form-check-input set" type="checkbox" rel="set" value="darkness-evolved" > Darkness Evolved
+					  </label>
+					</div>
+					<div class="form-check form-check-inline col-xs-2">
+					  <label class="form-check-label">
+					    <input class="form-check-input set" type="checkbox" rel="set" value="rise-of-bahamut" > Rise of Bahamut
+					  </label>
+					</div>
+					<div class="form-check form-check-inline col-xs-2">
+					  <label class="form-check-label">
+					    <input class="form-check-input set" type="checkbox" rel="set" value="tempest-of-the-gods" > Tempest of the Gods
+					  </label>
+					</div>
+				</div>
+
+			  	<div class="row">
+				  	<div class="col-xs-2 col-xs-offset-5">
+					  	<input type='button' class="btn btn-danger" onclick='uncheckAll()' value="Clear All"/>
+					  </div>
+				</div>
+			  </div>
+			</div>
+
+        	<h2 class="text-sm-center">Followers</h2>
+        	<div class="row">
+        	<div class="col">
+        	<div class="table-responsive">
+        	<table data-toggle="table" class="table table-striped table-bordered table-responsive" id="followertable"
+        	>
+        		<thead>
+        			<tr>
+        				<th>ARTWORK</th>
+        				<th data-sortable="true">ID</th>
+        				<th data-sortable="true">NAME</th>
+        				<th data-sortable="true">SET</th>
+        				<th data-sortable="true">CLASS</th>
+        				<th data-sortable="true">RARITY</th>
+        				<th data-sortable="true">PP</th>
+        				<th>FLAVOR TEXT</th>
+        				<th data-sortable="true">ATK</th>
+        				<th data-sortable="true">DEF</th>
+        				<th data-sortable="true">E.ATK</th>
+        				<th data-sortable="true">E.DEF</th>
+        				<th>ABILITY</th>
+        				<th data-sortable="true">ATTRIBUTE</th>
+        				<th>SOUND</th>
+        			</tr>
+        		</thead>
+        	<tbody>
+         <?php
+			$servername = "localhost";
+			$username = "admin";
+			$password = "vcu2017";
+
+			// Create connection
+			$mysqli = new mysqli($servername, $username, $password);
+
+
+			/* change db to shadowverse db */
+			$mysqli->select_db("shadowverse");
+
+			$sql = "SELECT * from followercard;";
+			$result = $mysqli->query($sql);
+			$row_cnt = $result->num_rows;
+
+			if ($result->num_rows > 0) {
+			    // output data of each row
+			    while($row = $result->fetch_assoc()) {
+			    	
+			    	$get_ability = $mysqli->query("SELECT followerText FROM followerability WHERE followerID =".$row["abilityID"].";");
+
+					$get_sound = $mysqli->query("SELECT soundURL FROM sound WHERE soundID =".$row["abilityID"].";");
+
+					$get_artwork = $mysqli->query("SELECT artworkURL FROM followerartwork WHERE artworkID =".$row["abilityID"].";");
+
+			    	$ability = $get_ability->fetch_assoc();
+			    	$sound = $get_sound->fetch_assoc();
+			    	$artwork = $get_artwork->fetch_assoc();
+
+			    	$class1 = str_replace(' ', '-', strtolower($row["ppcost"]));
+			    	if ($class1 >= 10) {
+			    		$class1 = "10";
+			    	}
+
+			    	$class2 = str_replace(' ', '-', strtolower($row["cardset"]));
+
+			        echo "<tr class=\"".$class1." ". $class2 . "\">";
+			        echo "<td><img src =\"" . $artwork["artworkURL"]. "\" height=\"256\" width=\"212\"></td>";
+			        echo "<td>" . $row["id"] . "</td>";
+			        echo "<td><b>" . $row["name"] . "</b></td>";
+			        echo "<td class=\"set filterable\">" . $row["cardset"] . "</td>";
+			        echo "<td>" . $row["class"] . "</td>";
+			        echo "<td>" . $row["rarity"] . "</td>";
+			        echo "<td class=\"pp filterable\">" . $row["ppcost"] . "</td>";
+			        echo "<td>" . $row["flavortext"] . "</td>";
+			        echo "<td>" . $row["atk"] . "</td>";
+			        echo "<td>" . $row["def"] . "</td>";
+			        echo "<td>" . $row["eatk"] . "</td>";
+			        echo "<td>" . $row["edef"] . "</td>";
+			        echo "<td>" . $ability["followerText"] . "</td>";
+			        echo "<td>" . $row["attribute"] . "</td>";
+			        echo "<td><audio controls=\"\" preload=\"none\">
+                            <source src=\"" . $sound["soundURL"] . "\" type=\"audio/mpeg\">
+                            Your browser does not support embedded audio.
+                        </audio></td>";
+			        echo "</tr>";
+			    }
+			} else {
+			    echo "0 results";
+			}
+
+			$result->close();
+
+			$mysqli->close();
+		?>
+			</tbody>
+		</table>
+		</div>
+		</div>
+		</div>
+
+        	<h2 class="text-sm-center">Spells</h2>
+        	<div class="row">
+        	<div class="col">
+        	<div class="table-responsive">
+        	<table class="table table-striped table-bordered table-responsive" id="spelltable">
+        		<thead>
+        			<tr>
+        				<th>ARTWORK</th>
+        				<th data-sortable="true">ID</th>
+        				<th data-sortable="true">NAME</th>
+        				<th data-sortable="true">SET</th>
+        				<th data-sortable="true">CLASS</th>
+        				<th data-sortable="true">RARITY</th>
+        				<th data-sortable="true">PP</th>
+        				<th>FLAVOR TEXT</th>
+        				<th>ABILITY</th>
+        			</tr>
+        		</thead>
+        	<tbody>
+         <?php
+			$servername = "localhost";
+			$username = "admin";
+			$password = "vcu2017";
+
+			// Create connection
+			$mysqli = new mysqli($servername, $username, $password);
+
+
+			/* change db to shadowverse db */
+			$mysqli->select_db("shadowverse");
+
+			$sql = "SELECT * from spellcard;";
+			$result = $mysqli->query($sql);
+			$row_cnt = $result->num_rows;
+
+			if ($result->num_rows > 0) {
+			    // output data of each row
+			    while($row = $result->fetch_assoc()) {
+			    	
+			    	$get_ability = $mysqli->query("SELECT spellText FROM spellability WHERE spellID =".$row["abilityID"].";");
+
+					$get_artwork = $mysqli->query("SELECT artworkURL FROM spellartwork WHERE artworkID =".$row["abilityID"].";");
+
+			    	$ability = $get_ability->fetch_assoc();
+			    	$artwork = $get_artwork->fetch_assoc();
+
+			    	$class1 = str_replace(' ', '-', strtolower($row["ppcost"]));
+			    	if ($class1 >= 10) {
+			    		$class1 = "10";
+			    	}
+
+			    	$class2 = str_replace(' ', '-', strtolower($row["cardset"]));
+
+			        echo "<tr class=\"".$class1." ". $class2 . "\">";
+			        echo "<td><img src =\"" . $artwork["artworkURL"]. "\" height=\"256\" width=\"212\"></td>";
+			        echo "<td>" . $row["id"] . "</td>";
+			        echo "<td><b>" . $row["name"] . "</b></td>";
+			        echo "<td class=\"set\">" . $row["cardset"] . "</td>";
+			        echo "<td>" . $row["class"] . "</td>";
+			        echo "<td>" . $row["rarity"] . "</td>";
+			        echo "<td class=\"pp\">" . $row["ppcost"] . "</td>";
+			        echo "<td>" . $row["flavortext"] . "</td>";
+			        echo "<td>" . $ability["spellText"] . "</td>";
+			        echo "</tr>";
+			    }
+			} else {
+			    echo "0 results";
+			}
+
+			$result->close();
+
+			$mysqli->close();
+		?>
+			</tbody>
+		</table>
+		</div>
+		</div>
+		</div>
+
+        	<h2 class="text-sm-center">Amulets</h2>
+        	<div class="row">
+        	<div class="col">
+        	<div class="table-responsive">
+        	<table class="table table-striped table-bordered table-responsive" id="amulettable">
+        		<thead>
+        			<tr>
+        				<th>ARTWORK</th>
+        				<th data-sortable="true">ID</th>
+        				<th data-sortable="true">NAME</th>
+        				<th data-sortable="true">TYPE</th>
+        				<th data-sortable="true">SET</th>
+        				<th data-sortable="true">CLASS</th>
+        				<th data-sortable="true">RARITY</th>
+        				<th data-sortable="true">PP</th>
+        				<th>FLAVOR TEXT</th>
+        				<th>ABILITY</th>
+        			</tr>
+        		</thead>
+        	<tbody>
+         <?php
+			$servername = "localhost";
+			$username = "admin";
+			$password = "vcu2017";
+
+			// Create connection
+			$mysqli = new mysqli($servername, $username, $password);
+
+
+			/* change db to shadowverse db */
+			$mysqli->select_db("shadowverse");
+
+			$sql = "SELECT * from amuletcard;";
+			$result = $mysqli->query($sql);
+			$row_cnt = $result->num_rows;
+
+			if ($result->num_rows > 0) {
+			    // output data of each row
+			    while($row = $result->fetch_assoc()) {
+			    	
+			    	$get_ability = $mysqli->query("SELECT abilityText FROM amuletability WHERE abilityID =".$row["abilityID"].";");
+
+					$get_artwork = $mysqli->query("SELECT artworkURL FROM amuletartwork WHERE artworkID =".$row["abilityID"].";");
+
+			    	$ability = $get_ability->fetch_assoc();
+			    	$artwork = $get_artwork->fetch_assoc();
+
+			    	$class1 = str_replace(' ', '-', strtolower($row["ppcost"]));
+
+			    	if ($class1 >= 10) {
+			    		$class1 = "10";
+			    	}
+
+			    	$class2 = str_replace(' ', '-', strtolower($row["cardset"]));
+
+			        echo "<tr class=\"".$class1." ". $class2 . "\">";
+			        echo "<td><img src =\"" . $artwork["artworkURL"]. "\" height=\"256\" width=\"212\"></td>";
+			        echo "<td>" . $row["id"] . "</td>";
+			        echo "<td><b>" . $row["name"] . "</b></td>";
+			        echo "<td>" . $row["type"] . "</td>";
+			        echo "<td class=\"set\">" . $row["cardset"] . "</td>";
+			        echo "<td>" . $row["class"] . "</td>";
+			        echo "<td>" . $row["rarity"] . "</td>";
+			        echo "<td class=\"pp\">" . $row["ppcost"] . "</td>";
+			        echo "<td>" . $row["flavortext"] . "</td>";
+			        echo "<td>" . $ability["abilityText"] . "</td>";
+			        echo "</tr>";
+			    }
+			} else {
+			    echo "0 results";
+			}
+
+			$result->close();
+
+			$mysqli->close();
+		?>
+			</tbody>
+		</table>
+		</div>
+		</div>
+		</div>
+
+	</div>
+</div>
+
+
+
+<script>
+function myFunction() {
+  // Declare variables 
+  var input, filter, table, tr, td, i;
+  input = document.getElementById("myInput");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("followertable");
+  tr = table.getElementsByTagName("tr");
+
+  // Loop through all table rows, and hide those who don't match the search query
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[0];
+    if (td) {
+      if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    } 
+  }
+
+  table = document.getElementById("spelltable");
+  tr = table.getElementsByTagName("tr");
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[0];
+    if (td) {
+      if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    } 
+  }
+
+  table = document.getElementById("amulettable");
+  tr = table.getElementsByTagName("tr");
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[0];
+    if (td) {
+      if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    } 
+  }
+}
+
+function uncheckAll(){
+   $("input[type='checkbox']:checked").prop("checked",false)
+   $("#myInput").val('');
+   table = document.getElementById("followertable");
+   tr = table.getElementsByTagName("tr");
+    for (i = 0; i < tr.length; i++) {
+	    td = tr[i].getElementsByTagName("td")[0];
+	    if (td) {
+	        tr[i].style.display = "";
+	      }
+    } 
+
+   table = document.getElementById("spelltable");
+   tr = table.getElementsByTagName("tr");
+    for (i = 0; i < tr.length; i++) {
+	    td = tr[i].getElementsByTagName("td")[0];
+	    if (td) {
+	        tr[i].style.display = "";
+	      }
+    } 
+
+   table = document.getElementById("amulettable");
+   tr = table.getElementsByTagName("tr");
+    for (i = 0; i < tr.length; i++) {
+	    td = tr[i].getElementsByTagName("td")[0];
+	    if (td) {
+	        tr[i].style.display = "";
+	      }
+    } 
+}
+</script>
+
+<script>
+  $(document).ready(function() {
+
+
+
+  	$(":checkbox").change(function() {
+
+  		var pparray = [];
+	  	$(".ppcost").each(function () {
+	        if ($(this).is(":checked")) { pparray.push($(this).val()); }
+	    });
+	  	
+	  	var setarray = [];
+	  	$(".set").each(function () {
+	        if ($(this).is(":checked")) { setarray.push($(this).val()); }
+	    });
+	  	console.log(pparray);
+
+	  	if (pparray == "" && setarray == "") { // if no filters selected, show all items
+	        $("tbody tr").show();
+	    } else if (pparray.length > 0 && setarray == ""){
+	    	$("tbody tr").hide();
+  			$("tbody tr").each(function() {
+  				var show = false;
+  			 	for(i = 0; i < pparray.length; i++) {
+  			 		console.log(pparray[i]);
+  			 		if($(this).hasClass(pparray[i])) {
+  			 			console.log("found");
+  			 			show = true;
+  			 		}
+  			 	}
+
+  			 	if (show) {
+  			 		$(this).show();
+  			 	} else {
+  			 		$(this).hide();
+  			 	}
+  		});
+	    } else if (pparray.length == "" && setarray.length > 0){
+	    	$("tbody tr").hide();
+  			$("tbody tr").each(function() {
+  				var show = false;
+  			 	for(i = 0; i < setarray.length; i++) {
+  			 		console.log(setarray[i]);
+  			 		if($(this).hasClass(setarray[i])) {
+  			 			console.log("found");
+  			 			show = true;
+  			 		}
+  			 	}
+
+  			 	if (show) {
+  			 		$(this).show();
+  			 	} else {
+  			 		$(this).hide();
+  			 	}
+  		});
+	    } else if (pparray.length > 0 && setarray.length > 0) {
+	    	$("tbody tr").hide();
+	    	$("tbody tr").each(function() {
+	    		var showpp = false;
+	    		var showset = false;
+
+	    		for(i = 0; i < pparray.length; i++) {
+  			 		console.log(pparray[i]);
+  			 		if($(this).hasClass(pparray[i])) {
+  			 			console.log("found");
+  			 			showpp = true;
+  			 		}
+  			 	}
+
+  			 	for(i = 0; i < setarray.length; i++) {
+  			 		console.log(setarray[i]);
+  			 		if($(this).hasClass(setarray[i])) {
+  			 			console.log("found");
+  			 			showset = true;
+  			 		}
+  			 	}
+
+  			 	if (showpp && showset) {
+  			 		$(this).show();
+  			 	} else {
+  			 		$(this).hide();
+  			 	}
+
+	    	});
+	    }
+  		
+
+  	});
+
+/*
+    $(":checkbox").change(function() {
+    	
+	  	var classes = [];
+	  	$(":checkbox").each(function () {
+	        if ($(this).is(":checked")) { classes.push($(this).val()); }
+	        
+	    });
+	  	
+	  	if (classes == "") { // if no filters selected, show all items
+	        $("#followertable tbody tr").show();
+	        $("#spelltable tbody tr").show();
+	        $("#amulettable tbody tr").show();
+	    } else if ((classes.length > 0 && set.length == 0)||(classes.length == 0 && set.length > 0)) {
+	    	
+	        $("#followertable tbody tr").each(function () {
+	        	var row = $(this);
+
+	            if ( (jQuery.inArray(row.find(".pp").html(), classes) !== -1 ||
+	            			(jQuery.inArray("10", classes) !== 1 && row.find(".pp").html() >= 10))
+	            	) {
+	            	row.show();
+	            } else { 
+	            	row.hide();
+	            	}
+	        });
+
+	        $("#spelltable tbody tr").each(function () {
+	        	var row = $(this);
+
+	        	if (jQuery.inArray("10", classes) !== -1) {
+	        		console.log("yeah");
+	        	}
+
+	            if ( (jQuery.inArray(row.find(".pp").html(), classes) !== -1 ||
+	            			(jQuery.inArray("10", classes) !== -1 && row.find(".pp").html() >= 10))
+	            	) {
+	            	row.show();
+	            } else { 
+	            	row.hide();
+	            	}
+	        });
+
+	        $("#amulettable tbody tr").each(function () {
+	        	var row = $(this);
+
+	            if ( (jQuery.inArray(row.find(".pp").html(), classes) !== -1 ||
+	            			(jQuery.inArray("10", classes) !== 1 && row.find(".pp").html() >= 10))
+	            	) {
+	            	row.show();
+	            } else { 
+	            	row.hide();
+	            	}
+	        });
+	    } else if (classes.length > 0 && set.length == 0) {
+
+	    }
+
+    });
+    */
+  });
+  </script>
+
+    </body>
+</html>
