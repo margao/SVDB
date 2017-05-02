@@ -198,8 +198,28 @@
 			$addartwork = "INSERT INTO spellartwork VALUES(null,'". $artwork."');";
 			$addability = "INSERT INTO spellability VALUES(null,'". $ability."');";
 
+			$checkSet = false;
+			if ($_POST["set"] == "Basic" || $_POST["set"] == "Standard" || $_POST["set"] == "Darkness Evolved" || $_POST["set"] == "Rise of Bahamut" || $_POST["set"] == "Tempest of the Gods") {
+				$checkSet = true;
+			}
+
+			$checkClass = false; 
+			if ($_POST["class"] == "Forestcraft" || $_POST["class"] == "Shadowcraft" || $_POST["class"] == "Bloodcraft" || $_POST["class"] == "Havencraft" || $_POST["class"] == "Swordcraft" || $_POST["class"] == "Runecraft" || $_POST["class"] == "Dragoncraft" || $_POST["class"] == "Neutral") {
+				$checkClass = true;
+			}
+
+			$checkRarity = false; 
+			if ($_POST["rarity"] == "Bronze" || $_POST["rarity"] == "Silver" || $_POST["rarity"] == "Gold" || $_POST["rarity"] == "Legendary") {
+				$checkRarity = true;
+			}
+
+			$checkPPCost = false;
+			if ($_POST["ppcost"] > 0 && $_POST["ppcost"] < 19) {
+				$checkPPCost = true;
+			}
+
 			echo '<pre>'; print_r("EXECUTING SQL STATEMENTS"); echo '</pre>';
-			if ($mysqli->query($addartwork) === TRUE && $mysqli->query($addability) === TRUE) {
+			if ($mysqli->query($addartwork) === TRUE && $mysqli->query($addability) === TRUE && $checkSet && $checkClass && $checkRarity && $checkPPCost) {
 				$last_id = $mysqli->insert_id;
 
 				$addcard = "INSERT INTO spellcard VALUES(null,\"". $name."\", \"". $_POST["set"]."\", \"". $_POST["class"]."\", \"". $_POST["rarity"]."\", ". $_POST["ppcost"].", \"".$flavor."\", ".$last_id.", ".$last_id.");";
@@ -208,6 +228,7 @@
 
 				echo '<pre>'; print_r($addcard. " SUCCESS"); echo '</pre>';
 			} else {
+				$addcard = "INSERT INTO spellcard VALUES(null,\"". $name."\", \"". $_POST["set"]."\", \"". $_POST["class"]."\", \"". $_POST["rarity"]."\", ". $_POST["ppcost"].", \"".$flavor."\", ".$last_id.", ".$last_id.");";
 				echo '<pre>'; print_r($addcard. " FAILURE"); echo '</pre>';
 			}
 			$mysqli->close();

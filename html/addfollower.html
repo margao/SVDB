@@ -323,7 +323,37 @@
 			$addartwork = "INSERT INTO followerartwork VALUES(null,'". $artwork."');";
 			$addability = "INSERT INTO followerability VALUES(null,'". $ability."');";
 
-			if ($mysqli->query($addsound) === TRUE && $mysqli->query($addartwork) === TRUE && $mysqli->query($addability) === TRUE) {
+			$checkSet = false;
+			if ($_POST["set"] == "Basic" || $_POST["set"] == "Standard" || $_POST["set"] == "Darkness Evolved" || $_POST["set"] == "Rise of Bahamut" || $_POST["set"] == "Tempest of the Gods") {
+				$checkSet = true;
+			}
+
+			$checkClass = false; 
+			if ($_POST["class"] == "Forestcraft" || $_POST["class"] == "Shadowcraft" || $_POST["class"] == "Bloodcraft" || $_POST["class"] == "Havencraft" || $_POST["class"] == "Swordcraft" || $_POST["class"] == "Runecraft" || $_POST["class"] == "Dragoncraft" || $_POST["class"] == "Neutral") {
+				$checkClass = true;
+			}
+
+			$checkRarity = false; 
+			if ($_POST["rarity"] == "Bronze" || $_POST["rarity"] == "Silver" || $_POST["rarity"] == "Gold" || $_POST["rarity"] == "Legendary") {
+				$checkRarity = true;
+			}
+
+			$checkPPCost = false;
+			if ($_POST["ppcost"] > 0 && $_POST["ppcost"] < 19) {
+				$checkPPCost = true;
+			}
+
+			$checkStats = false;
+			if ( ($_POST["atk"] >= 0 && $_POST["atk"] <= 15) && ($_POST["eatk"] >= 0 && $_POST["eatk"] <= 15) && ($_POST["def"] >= 0 && $_POST["def"] <= 15) && ($_POST["edef"] >= 0 && $_POST["edef"] <= 15) ) {
+				$checkStats = true;
+			}
+
+			$checkAttribute = false;
+			if ( $_POST["attribute"] == "None" || $_POST["attribute"] == "Earth Sigil" || $_POST["attribute"] == "Officer" || $_POST["attribute"] == "Commander") {
+				$checkAttribute = true;
+			}
+
+			if ($mysqli->query($addsound) === TRUE && $mysqli->query($addartwork) === TRUE && $mysqli->query($addability) === TRUE && $checkSet && $checkClass && $checkRarity && $checkPPCost && $checkStats && $checkAttribute) {
 				$last_id = $mysqli->insert_id;
 
 				$addcard = "INSERT INTO followercard VALUES(null,\"". $name."\", \"". $_POST["set"]."\", \"". $_POST["class"]."\", \"". $_POST["rarity"]."\", ". $_POST["ppcost"].", \"".$flavor."\", ". $_POST["atk"].",".$_POST["def"].",".$_POST["eatk"].",".$_POST["edef"].",\"".$last_id."\", \"".$_POST["attribute"]."\", ". $last_id.", ".$last_id.");";
@@ -332,6 +362,7 @@
 
 				echo '<pre>'; print_r($addcard. " SUCCESS"); echo '</pre>';
 			} else {
+				$addcard = "INSERT INTO followercard VALUES(null,\"". $name."\", \"". $_POST["set"]."\", \"". $_POST["class"]."\", \"". $_POST["rarity"]."\", ". $_POST["ppcost"].", \"".$flavor."\", ". $_POST["atk"].",".$_POST["def"].",".$_POST["eatk"].",".$_POST["edef"].",\"".$last_id."\", \"".$_POST["attribute"]."\", ". $last_id.", ".$last_id.");";
 				echo '<pre>'; print_r($addcard. " FAILURE"); echo '</pre>';
 			}
 			$mysqli->close();
